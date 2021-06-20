@@ -1,0 +1,20 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="Настройки">
+
+        <EditTextPreference
+            app:key="@string/host"
+            app:title="Хост"
+            app:defaultValue="@string/hostDefault"/>
+
+        <EditTextPreference
+            app:key="@string/port"
+            app:title="Порт"
+            android:inputType="numberDecimal"
+            android:digits="0123456789"
+            app:defaultValue="@string/portDefault" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
