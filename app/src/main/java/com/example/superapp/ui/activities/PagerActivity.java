@@ -19,7 +19,7 @@ import java.nio.ByteOrder;
 public class PagerActivity extends AppCompatActivity implements PassportFragment.ClickCallback {
 
     private static final String TAG = "PagerActivity";
-
+    String[] phrases = {"Оценка курса %s", "При прохождении этого курса вы получите %s процентов необходимых компетенций на рынке" };
     private TCPQueueSender tcpQueueSender;
     private TTS tts ;
     private String hostname;
@@ -97,8 +97,10 @@ public class PagerActivity extends AppCompatActivity implements PassportFragment
             ByteBuffer b = ByteBuffer.wrap(data);
             b.order(ByteOrder.LITTLE_ENDIAN);
             int v = b.getInt();
-            System.out.println("RESULT!!!!!!!!!!!!!!!!!!!!!!!!!!!   " + v/10000);
-            tts.speak("Оценка курса " + String.format("%.2f",v/10000.0f) );
+            int rnd = (int)(Math.random()*(phrases.length));
+            System.out.println("OTLADKA " + rnd);
+            tts.speak(String.format(phrases[rnd], String.format("%.2f",v/10000.0f)));
+         //   tts.speak("При прохождении этого курса вы получите " + String.format("%.2f",v/10000.0f) + " процентов необходимых компетенций на рынке" );
         }
 
         @Override

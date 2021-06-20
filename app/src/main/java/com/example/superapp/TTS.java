@@ -38,7 +38,7 @@ public class TTS {
                 textToSpeech.setLanguage(Locale.US);
             }
             textToSpeech.setPitch(1.3f);
-            textToSpeech.setSpeechRate(0.7f);
+            textToSpeech.setSpeechRate(1.0f);
             ttsEnabled = true;
         } else if (initStatus == TextToSpeech.ERROR) {
             ttsEnabled = false;

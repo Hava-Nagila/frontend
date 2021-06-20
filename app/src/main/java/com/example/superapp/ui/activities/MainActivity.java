@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     public void buttonEffect(View button) {
 
      //   startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-        startActivity(new Intent(MainActivity.this, PagerActivity.class));
+      //  startActivity(new Intent(MainActivity.this, PagerActivity.class));
         recognize.startListening(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
     }
 
