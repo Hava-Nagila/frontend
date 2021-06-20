@@ -5,6 +5,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.example.superapp.TTS;
 import com.example.superapp.net.EndpointData;
 import com.example.superapp.ui.PassportFragment;
 import com.example.superapp.R;
@@ -20,7 +21,7 @@ public class PagerActivity extends AppCompatActivity implements PassportFragment
     private static final String TAG = "PagerActivity";
 
     private TCPQueueSender tcpQueueSender;
-
+    private TTS tts ;
     private String hostname;
     private int port;
     private boolean connectionOpened;
@@ -29,7 +30,7 @@ public class PagerActivity extends AppCompatActivity implements PassportFragment
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pager);
-
+        tts = TTS.get(this, null);
         eData = new EndpointData(this);
         hostname = eData.getHostname();
         port = eData.getPort();
@@ -95,8 +96,9 @@ public class PagerActivity extends AppCompatActivity implements PassportFragment
         public void onResponse(byte[] data, int n) {
             ByteBuffer b = ByteBuffer.wrap(data);
             b.order(ByteOrder.LITTLE_ENDIAN);
-            float v = b.getFloat();
-            System.out.println("RESULT!!!!!!!!!!!!!!!!!!!!!!!!!!!   " + v);
+            int v = b.getInt();
+            System.out.println("RESULT!!!!!!!!!!!!!!!!!!!!!!!!!!!   " + v/10000);
+            tts.speak("Оценка курса " + String.format("%.2f",v/10000.0f) );
         }
 
         @Override

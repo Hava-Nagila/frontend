@@ -111,9 +111,23 @@ public final class TCPClient implements Client {
             return;
         }
         try {
-            out.write(data);
-            out.flush();
-        } catch (IOException exception) {
+            Thread thread = new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    try  {
+
+                        out.write(data);
+                        out.flush();
+                        //Your code goes here
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            thread.start();
+        } catch (Exception exception) {
             errorCallback.onSendError();
         }
     }
@@ -149,4 +163,29 @@ public final class TCPClient implements Client {
         closeConnection();
     }
 
+
+//    class MyAsyncTask extends AsyncTask<String, Void, Void> {
+//
+//        private Exception exception;
+//
+//        protected Void doInBackground(String... urls) {
+//            System.out.println("urls[0]  " + urls[0]);
+//            Log.d(TAG, "send() called");
+//            if (socket == null || socket.isClosed()) {
+//                errorCallback.onSendError();
+//                return null;
+//            }
+//            try {
+//                out.write(Integer.parseInt(urls[0]));
+//                out.flush();
+//            } catch (IOException exception) {
+//                errorCallback.onSendError();
+//            }
+//        }
+//
+//        protected void onPostExecute(Void feed) {
+//            // TODO: check this.exception
+//            // TODO: do something with the feed
+//        }
+//    }
 }

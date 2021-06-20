@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(int i) {
-                tts.speak("Извините, я не поняла Вас");
+                tts.speak("Ошибка ввода");
             }
 
             @Override
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     public void buttonEffect(View button) {
 
      //   startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-     //   startActivity(new Intent(MainActivity.this, PagerActivity.class));
+        startActivity(new Intent(MainActivity.this, PagerActivity.class));
         recognize.startListening(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
     }
 
